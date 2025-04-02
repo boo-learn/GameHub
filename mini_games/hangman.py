@@ -16,7 +16,7 @@ import random
 
 words = ["карп","машина","самолёт"]
 word = random.choice(words)
-right_letter = ["_"] * len(word)
+right_letter = ["*"] * len(word)
 attempts = 6
 
 print(" ".join(right_letter))
