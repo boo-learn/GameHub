@@ -19,6 +19,12 @@ def player_choice():
   return user_choice
 
 
+def play ():
+    print("Добро пожаловать!!")
+
+
+
+
 
 
 def games():
