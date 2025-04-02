@@ -9,3 +9,27 @@
 
 # По ходу игры после каждой попытки пользователя компьютер выводит сообщение, было ли число пользователя
 # больше или меньше загаданного числа: "Загаданное число больше.", "Загаданное число меньше." соответственно.
+
+from random import randint
+
+
+def guess_num_start():
+    turns = 6
+    while turns != 0:
+        user_choice = input('Ваше предположение? ')
+        comp_choice = randint(0, 100)
+        if user_choice == comp_choice:
+            print(f'Поздравляю вы угадали {comp_choice} за {6 - turns + 1} попыток!')
+            break
+        else:
+            turns -= 1
+            if turns > 0:
+                print("Упс! Попробуйте еще раз")
+                print(f'У вас осталось {turns} попыток!')
+            else:
+                print('Вы проиграли!')
+                print(f"Загаданное число было {comp_choice}")
+
+
+if __name__ == "__main__":
+    guess_num_start()
