@@ -17,11 +17,11 @@ import random
 words = ["карп","машина","самолёт"]
 word = random.choice(words)
 hidden = ["*"] * len(word)
-attempts = 6
+attempts = 0
 
 print(" ".join(hidden))
 
-while attempts > 0:
+while attempts < 6:
     letter = input("\nВведите букву: ")
 
     if letter in word:
@@ -29,10 +29,10 @@ while attempts > 0:
             if word[i] == letter:
                 hidden[i] = letter
     else:
-        attempts -= 1
+        attempts += 1
 
     print(" ".join(hidden))
-    print(f"Осталось попыток: {attempts}")
+    print(f"Штрафные очки: {attempts}")
 
     if "*" not in hidden:
         print("Вы выиграли!")
