@@ -21,7 +21,7 @@ def player_choice():
 
 
 
-def games():
+def games(computer_choice, player_choice):
     if player_choice == computer_choice():
         print(f"player_choice: {player_choice}, computer_choice: {computer_choice()} НИЧЬЯ!!!")
 
@@ -32,6 +32,5 @@ def games():
     else:
      return "Компьютер выйграл!!! "
 
-def play():
-    print("Игра КНБ ")
+
 
