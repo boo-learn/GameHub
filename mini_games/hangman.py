@@ -16,11 +16,29 @@ import random
 
 words = ["карп","машина","самолёт"]
 word = random.choice(words)
-right_letters=["_"] * len(word)
-points = 6
+right_letter = ["_"] * len(word)
+attempts = 6
 
-while points > 0 and "_" in right_letters:
-    letter = input("\nВведите букву: ").lower()
+print(" ".join(right_letter))
+
+while attempts > 0:
+    letter = input("\nВведите букву: ")
+
+    if letter in word:
+        for i in range(len(word)):
+            if word[i] == letter:
+                right_letter[i] = letter
+    else:
+        attempts -= 1
+
+    print(" ".join(right_letter))
+    print(f"Осталось попыток: {attempts}")
+
+    if "_" not in right_letter:
+        print("Вы выиграли!")
+        break
+else:
+    print(f"Вы проиграли! Загаданное слово: {word}")
 
 
 
