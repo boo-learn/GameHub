@@ -16,7 +16,7 @@ from random import randint
 def guess_num_start():
     turns = 6
     while turns != 0:
-        user_choice = input('Ваше предположение? ')
+        user_choice = int(input('Ваше предположение? '))
         comp_choice = randint(0, 100)
         if user_choice == comp_choice:
             print(f'Поздравляю вы угадали {comp_choice} за {6 - turns + 1} попыток!')
@@ -26,6 +26,11 @@ def guess_num_start():
             if turns > 0:
                 print("Упс! Попробуйте еще раз")
                 print(f'У вас осталось {turns} попыток!')
+                if comp_choice > user_choice:
+                    print("Загаданное число больше")
+                else:
+                    print("Загаданное число меньше")
+
             else:
                 print('Вы проиграли!')
                 print(f"Загаданное число было {comp_choice}")
