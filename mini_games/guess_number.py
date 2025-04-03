@@ -15,9 +15,9 @@ from random import randint
 
 def guess_num_start():
     turns = 6
+    comp_choice = randint(0, 100)
     while turns != 0:
         user_choice = int(input('Ваше предположение? '))
-        comp_choice = randint(0, 100)
         if user_choice == comp_choice:
             print(f'Поздравляю вы угадали {comp_choice} за {6 - turns + 1} попыток!')
             break
