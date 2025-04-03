@@ -1,3 +1,4 @@
+import random
 # Игра "Виселица"
 
 # Напишите программу для игры "Виселица". Игроку дается слово, которое он должен угадать, называя буквы.
@@ -12,3 +13,34 @@
 # 4. Если игрок назвал неправильную букву, количество штрафных очков должно увеличиваться.
 # 5. Игра заканчивается победой, если все буквы слова угаданы, или проигрышем,
 # если количество штрафных очков достигает лимита (например, 6).
+
+words = ["карп","машина","самолёт"]
+word = random.choice(words)
+hidden = ["*"] * len(word)
+attempts = 0
+
+print(" ".join(hidden))
+
+while attempts < 6:
+    letter = input("\nВведите букву: ")
+
+    if letter in word:
+        for i in range(len(word)):
+            if word[i] == letter:
+                hidden[i] = letter
+    else:
+        attempts += 1
+
+    print(" ".join(hidden))
+    print(f"Штрафные очки: {attempts}")
+
+    if "*" not in hidden:
+        print("Вы выиграли!")
+        break
+else:
+    print(f"Вы проиграли! Загаданное слово: {word}")
+
+
+
+
+
