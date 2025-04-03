@@ -46,3 +46,66 @@
 # - 1 * 1 -
 # - 1 1 1 -
 # Поздравляем! Вы открыли все безопасные клетки.
+
+import random
+
+def minesweeper():
+	size = 5
+	num_mines = 5
+	mines = set()
+	field = [[0 for _ in range(size)] for _ in range(size)]
+	while len(mines) < num_mines:
+		row = random.randint(0, size - 1)
+		col = random.randint(0, size - 1)
+		if (row, col) not in mines:
+			mines.add((row, col))
+			field[row][col] = -1
+			for i in range(row - 1, row + 2):
+				for j in range(col - 1, col + 2):
+					if 0 <= i < size and 0 <= j < size and field[i][j] != -1:
+						field[i][j] += 1
+	opened = set()
+	while True:
+		print("Текущее поле:")
+		for i in range(size):
+			for j in range(size):
+				if (i, j) in opened:
+					if field[i][j] == -1:
+						print("*", end=" ")
+					else:
+						print(field[i][j], end=" ")
+				else:
+					print("-", end=" ")
+			print()
+		user_input = input("Введите координаты клетки (строка столбец): ").strip()
+		if not user_input.replace(" ", "").isdigit() or len(user_input.split()) != 2:
+			print("Некорректный ввод. Попробуйте снова.")
+			continue
+		row, col = map(int, user_input.split())
+		if not (0 <= row < size and 0 <= col < size):
+			print("Координаты вне диапазона. Попробуйте снова.")
+			continue
+		if (row, col) in mines:
+			print("Вы проиграли! Вы попали на мину.")
+			break
+		opened.add((row, col))
+		if len(opened) == size * size - num_mines:
+			print("Поздравляем! Вы открыли все безопасные клетки.")
+			break
+
+if __name__ == "__main__":
+	minesweeper()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
