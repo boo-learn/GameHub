@@ -5,38 +5,42 @@
 # Пользователь вводит свой выбор, и программа определяет победителя. Если выборы одинаковы, игра объявляет ничью.
 # Игра продолжается до тех пор, пока один из игроков (пользователь или компьютер)
 # не одержит на три победы больше, чем соперник. В конце показывается итоговый счет и объявляется победитель.
-
 import random
 
 
-def computer_choice():
+def game():
     choices = ['камень', 'ножницы', 'бумага']
-    return random.choice(choices)
+    player_score, computer_score = 0, 0
+    print("игра началась играем до 3 побед. ")
 
+    while player_score < 3 and computer_score < 3:
+        player = input("ваш ход (камень, ножницы, бумага)").lower()
 
-def player_choice():
-  user_choice = input("Выбор : камень, ножницы, бумага")
-  return user_choice
+        computer = random.choice(choices)
 
+        print(f"Ход компютера: {computer}")
 
-def play ():
-    print("Добро пожаловать!!")
+        if player == computer:
+            print("Ничья")
+        elif (player == "камень" and computer == "ножницы"):
+            print("Вы выиграли этот раунд!")
+            player_score += 1
+        elif (player == "ножницы" and computer == "бумага"):
+            print("Вы выиграли этот раунд!")
+            player_score += 1
+        elif (player == "бумага" and computer == "камень"):
+            print("Вы выиграли этот раунд!")
+            player_score += 1
+        else:
+            print("Компьютер выйграл этот раунд")
+            computer_score += 1
 
+    print(f"счет : {computer_score} - {player_score}")
 
-
-
-
-
-def games(computer_choice, player_choice):
-    if player_choice == computer_choice():
-        print(f"player_choice: {player_choice}, computer_choice: {computer_choice()} НИЧЬЯ!!!")
-
-    elif (player_choice == ('камень') and computer_choice == ('ножницы') or player_choice == ('ножницы') and
-          computer_choice == ('бумага') or player_choice('бумага') and computer_choice('камень')):
-        return "Вы Выйграли!!"
+    if player_score == 3:
+        print("вы выйграли")
 
     else:
-     return "Компьютер выйграл!!! "
-
+        print("компьютер выйграл ")
 
 
