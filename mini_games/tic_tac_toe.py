@@ -51,7 +51,7 @@ import random
 # for line in game_field:
 #     print(" ".join(line))
 
-
+moves_number = 0
 field = []
 for _ in range(3):
     row = []
@@ -66,17 +66,18 @@ def print_field():
         print("------")
 
 
-def move_checking(x, y):
-    if field[x - 1][y - 1] != " ":
-        return False
-    return x in range(1, 4) and y in range(1, 4)
+def move_checking(x, y, moves_number):
+    if x in range(1, 4) and y in range(1, 4) and field[x - 1][y - 1] == " ":
+        moves_number += 1
+        return True
+    return False
 
 
 def player_move():
     while True:
         x = int(input("Введите номер строки (от 1 до 3) "))
         y = int(input("Введите номер колонки (от 1 до 3) "))
-        if move_checking(x, y):
+        if move_checking(x, y, moves_number):
             field[x - 1][y - 1] = "X"
             break
         else:
@@ -87,7 +88,7 @@ def computer_move():
     while True:
         x = random.randint(1, 3)
         y = random.randint(1, 3)
-        if field[x - 1][y - 1] == " ":
+        if move_checking(x, y, moves_number):
             field[x - 1][y - 1] = "0"
             break
 
@@ -108,28 +109,22 @@ def check_winner_combination(symbol):
 def check_winner():
     if check_winner_combination("X"):
         return "Победил игрок"
-    elif check_winner_combination("O"):
+    elif check_winner_combination("0"):
         return "Победил компьютер"
     return False
-
-
-def player_move():
-    while True:
-        x = int(input("Введите номер строки (от 1 до 3) "))
-        y = int(input("Введите номер колонки (от 1 до 3) "))
-        if move_checking(x, y):
-            field[x - 1][y - 1] = "X"
-            break
-        else:
-            print("Неправильный ввод (значения должны быть от 1 до 3 и не повторяться) !")
 
 
 while True:
     player_move()
     print_field()
+    if moves_number == 9:
+        print("Ничья")
+        break
     computer_move()
     print_field()
     result = check_winner()
     if result:
         print(result)
-    print("Для выхода нажмите Ctrl + D")
+        break
+    else:
+        print("Для выхода нажмите Ctrl + D")
