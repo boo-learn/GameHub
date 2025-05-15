@@ -66,7 +66,10 @@ def print_field():
 
 
 def move_checking(x, y):
+    if field[x-1][y-1] != " ":
+        return False
     return x in range(1, 4) and y in range(1, 4)
+
 
 
 def player_move():
@@ -77,10 +80,10 @@ def player_move():
             field[x - 1][y - 1] = "X"
             break
         else:
-            print("Неправильный ввод (значения должны быть от 1 до 3) !")
-            # continue
+            print("Неправильный ввод (значения должны быть от 1 до 3 и не повторяться) !")
 
 
 while True:
     player_move()
     print_field()
+    print("Для выхода нажмите Ctrl + D")
