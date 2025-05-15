@@ -1,5 +1,6 @@
 # Задание:
 # Разработать консольную игру «Крестики-нолики», в которой игрок играет против компьютера.
+from dataclasses import field
 
 # Требования:
 
@@ -34,17 +35,34 @@
 # Выводит результаты игры.
 
 # Примеры, которыми можно воспользоваться:
-game_field = [
-    ["X", "X", "O"],
-    [" ", "O", "X"],
-    ["O", " ", "X"],
-]
-
-for line in game_field:
-    print(" ".join(line))
-
-print("------")
+# game_field = [
+#     ["X", "X", "O"],
+#     [" ", "O", "X"],
+#     ["O", " ", "X"],
+# ]
+#
+# for line in game_field:
+#     print(" ".join(line))
+#
+# print("------")
 # step:
-game_field[1][0] = "X"
-for line in game_field:
-    print(" ".join(line))
+# game_field[1][0] = "X"
+# for line in game_field:
+#     print(" ".join(line))
+
+
+game_field = []
+for _ in range(3):
+    row = []
+    for _ in range(3):
+        row.append(" ")
+    game_field.append(row)
+
+
+def print_field(field):
+    for line in field:
+        print(" ".join(line))
+        print("------")
+
+print_field(game_field)
+
