@@ -32,7 +32,7 @@ def rock_paper_scissors():
     print("Выигрывает тот, кто выиграет три раза\n")
 
 
-    while player_score < 3 or computer_score < 3:
+    while player_score < 3 and computer_score < 3:
         print(f"\nСчёт: Вы {player_score} - Компьютер {computer_score}")
         player = player_choice()
         computer = computer_choice()
