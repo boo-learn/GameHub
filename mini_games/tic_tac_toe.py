@@ -66,7 +66,8 @@ def print_field():
         print("------")
 
 
-def move_checking(x, y, moves_number):
+def move_checking(x, y):
+    global moves_number
     if x in range(1, 4) and y in range(1, 4) and field[x - 1][y - 1] == " ":
         moves_number += 1
         return True
@@ -77,7 +78,7 @@ def player_move():
     while True:
         x = int(input("Введите номер строки (от 1 до 3) "))
         y = int(input("Введите номер колонки (от 1 до 3) "))
-        if move_checking(x, y, moves_number):
+        if move_checking(x, y):
             field[x - 1][y - 1] = "X"
             break
         else:
@@ -88,7 +89,7 @@ def computer_move():
     while True:
         x = random.randint(1, 3)
         y = random.randint(1, 3)
-        if move_checking(x, y, moves_number):
+        if move_checking(x, y):
             field[x - 1][y - 1] = "0"
             break
 
