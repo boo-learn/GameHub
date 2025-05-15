@@ -67,10 +67,9 @@ def print_field():
 
 
 def move_checking(x, y):
-    if field[x-1][y-1] != " ":
+    if field[x - 1][y - 1] != " ":
         return False
     return x in range(1, 4) and y in range(1, 4)
-
 
 
 def player_move():
@@ -86,18 +85,51 @@ def player_move():
 
 def computer_move():
     while True:
-        x = random.randint(1,3)
-        y = random.randint(1,3)
-        if field [x - 1][y - 1] == " ":
-            field[x - 1][y - 1] ="0"
+        x = random.randint(1, 3)
+        y = random.randint(1, 3)
+        if field[x - 1][y - 1] == " ":
+            field[x - 1][y - 1] = "0"
             break
+
+
+def check_winner_combination(symbol):
+    if field[0][0] == field[1][1] == field[2][2] == symbol or \
+            field[0][2] == field[1][1] == field[2][0] == symbol or \
+            field[0][0] == field[0][1] == field[0][2] == symbol or \
+            field[1][0] == field[1][1] == field[1][2] == symbol or \
+            field[2][0] == field[2][1] == field[2][2] == symbol or \
+            field[0][0] == field[1][0] == field[2][0] == symbol or \
+            field[1][0] == field[1][1] == field[1][2] == symbol or \
+            field[2][0] == field[2][1] == field[2][2] == symbol:
+        return True
+    return False
+
+
+def check_winner():
+    if check_winner_combination("X"):
+        return "Победил игрок"
+    elif check_winner_combination("O"):
+        return "Победил компьютер"
+    return False
+
+
+def player_move():
+    while True:
+        x = int(input("Введите номер строки (от 1 до 3) "))
+        y = int(input("Введите номер колонки (от 1 до 3) "))
+        if move_checking(x, y):
+            field[x - 1][y - 1] = "X"
+            break
+        else:
+            print("Неправильный ввод (значения должны быть от 1 до 3 и не повторяться) !")
+
 
 while True:
     player_move()
     print_field()
     computer_move()
+    print_field()
+    result = check_winner()
+    if result:
+        print(result)
     print("Для выхода нажмите Ctrl + D")
-
-
-
-
