@@ -1,6 +1,7 @@
 # Задание:
 # Разработать консольную игру «Крестики-нолики», в которой игрок играет против компьютера.
 from dataclasses import field
+import random
 
 # Требования:
 
@@ -83,7 +84,20 @@ def player_move():
             print("Неправильный ввод (значения должны быть от 1 до 3 и не повторяться) !")
 
 
+def computer_move():
+    while True:
+        x = random.randint(1,3)
+        y = random.randint(1,3)
+        if field [x - 1][y - 1] == " ":
+            field[x - 1][y - 1] ="0"
+            break
+
 while True:
     player_move()
     print_field()
+    computer_move()
     print("Для выхода нажмите Ctrl + D")
+
+
+
+
