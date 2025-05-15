@@ -44,6 +44,7 @@ def count_bulls_and_cows(secret, guess):
 # Основа программы
 def bulls_and_cows():
     secret_number = generate_secret_number()
+    print(f"[Для тестирования] Загаданное число компом: {secret_number}")
     attempts = 0
 
     while True:
