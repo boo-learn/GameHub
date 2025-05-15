@@ -51,18 +51,36 @@ from dataclasses import field
 #     print(" ".join(line))
 
 
-game_field = []
+field = []
 for _ in range(3):
     row = []
     for _ in range(3):
         row.append(" ")
-    game_field.append(row)
+    field.append(row)
 
 
-def print_field(field):
+def print_field():
     for line in field:
         print(" ".join(line))
         print("------")
 
-print_field(game_field)
 
+def move_checking(x, y):
+    return x in range(1, 4) and y in range(1, 4)
+
+
+def player_move():
+    while True:
+        x = int(input("Введите номер строки (от 1 до 3) "))
+        y = int(input("Введите номер колонки (от 1 до 3) "))
+        if move_checking(x, y):
+            field[x - 1][y - 1] = "X"
+            break
+        else:
+            print("Неправильный ввод (значения должны быть от 1 до 3) !")
+            # continue
+
+
+while True:
+    player_move()
+    print_field()
