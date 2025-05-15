@@ -20,8 +20,47 @@
 #   После победы программа должна вывести количество попыток, затраченных игроком.
 
 
+import random
+
+# Генерирует случайное четырёхзначное число с неповторяющимися цифрами.
+# Возвращает строку из 4 цифр.
+def generate_secret_number():
+    digits = list("0123456789") # Эта строка преобразует строку "0123456789" в список отдельных символов
+    random.shuffle(digits) # функция перемешивает элементы списка случайным образом
+    return ''.join(digits[:4]) # Первые 4 уникальные цифры после перемешивания
+
+# Проверяет корректность ввода игрока (должно быть числом, состоять
+# из 4 цифр и все цифры должны быть уникальными)
+def is_valid_guess(guess):
+    return guess.isdigit() and len(guess) == 4 and len(set(guess)) == 4
+
+# Сравнивает секретное число и попытку игрока. Возвращает кортеж (быки, коровы)
+# Бык: правильная цифра на правильном месте. Корова: правильная цифра на неправильном месте.
+def count_bulls_and_cows(secret, guess):
+    bulls = sum(s == g for s, g in zip(secret, guess))
+    cows = sum(min(secret.count(d), guess.count(d)) for d in set(guess)) - bulls
+    return bulls, cows
+
+# Основа программы
 def bulls_and_cows():
-    ...  # тут основной код программы
+    secret_number = generate_secret_number()
+    attempts = 0
+
+    while True:
+        guess = input("Введи своё четырёхзначное число: ").strip()
+
+        if not is_valid_guess(guess):
+            print("Неверный ввод. Введи четырёхзначное число с разными цифрами.")
+            continue
+
+        attempts += 1
+        bulls, cows = count_bulls_and_cows(secret_number, guess)
+
+        print(f"Быки: {bulls}, Коровы: {cows}")
+
+        if bulls == 4:
+            print(f"Поздравляю! Ты угадал число {secret_number} за {attempts} попыток.")
+            break
 
 
 if __name__ == "__main__":
