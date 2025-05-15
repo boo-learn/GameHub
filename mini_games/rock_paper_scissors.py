@@ -6,17 +6,66 @@
 # Игра продолжается до тех пор, пока один из игроков (пользователь или компьютер)
 # не одержит на три победы больше, чем соперник. В конце показывается итоговый счет и объявляется победитель.
 
+import random
+
+# Функция рандомного решения от программы
 def computer_choice() -> str:
-    ...
+    return random.choice(["камень", "ножницы", "бумага"])
 
-
-def player_choice() -> str:
-    ...
+# Функция для определения решения игрока
+# lower() чтобы привести к нижнему регистру для сравнения в логике
+# strip() — удаит пробелы и лишние символы с начала и конца строки (меньше вызовет ошибок)
+def player_choice():
+    while True:
+        choice = input("Выберите (камень, ножницы, бумага): ").lower().strip()
+        if choice == "камень" or choice == "ножницы" or choice == "бумага":
+            return choice
+        print("Неверный выбор. Попробуйте снова")
 
 
 def rock_paper_scissors():
-    ...  # тут основной код программы
+    # Зададм начальные переменные
+    player_score = 0
+    computer_score = 0
+
+    print("Играем в игру Камень, ножницы, бумага")
+    print("Выигрывает тот, кто выиграет три раза\n")
+
+
+    while player_score < 3 or computer_score < 3:
+        print(f"\nСчёт: Вы {player_score} - Компьютер {computer_score}")
+        player = player_choice()
+        computer = computer_choice()
+
+        print("Вы выбрали:", player)
+        print("Компьютер выбрал:", computer)
+        print(f"\n") # визуал
+
+        # Логика работы программы
+
+        # Если выбор пользователя равен выбору программы
+        if player == computer:
+            print("Ничья.")
+
+        # Если выбор пользователя отличается выбору программы
+        elif (player == "камень" and computer == "ножницы") or \
+             (player == "ножницы" and computer == "бумага") or \
+             (player == "бумага" and computer == "камень"):
+            print("Вы выиграли раунд!")
+            player_score += 1
+        else:
+            print("Программа выиграла раунд.")
+            computer_score += 1
+
+    print("=======================================================")  # визуал
+    print(f"\nФинальный счёт: Вы {player_score} - Программа {computer_score}")
+    if player_score > computer_score:
+        print("Вы победили!")
+    else:
+        print("Программа победила!")
+    print("=======================================================")  # визуал
 
 
 if __name__ == "__main__":
     rock_paper_scissors()
+
