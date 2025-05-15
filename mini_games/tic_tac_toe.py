@@ -1,5 +1,6 @@
 # Задание:
 # Разработать консольную игру «Крестики-нолики», в которой игрок играет против компьютера.
+from dataclasses import field
 
 # Требования:
 
@@ -34,17 +35,52 @@
 # Выводит результаты игры.
 
 # Примеры, которыми можно воспользоваться:
-game_field = [
-    ["X", "X", "O"],
-    [" ", "O", "X"],
-    ["O", " ", "X"],
-]
-
-for line in game_field:
-    print(" ".join(line))
-
-print("------")
+# game_field = [
+#     ["X", "X", "O"],
+#     [" ", "O", "X"],
+#     ["O", " ", "X"],
+# ]
+#
+# for line in game_field:
+#     print(" ".join(line))
+#
+# print("------")
 # step:
-game_field[1][0] = "X"
-for line in game_field:
-    print(" ".join(line))
+# game_field[1][0] = "X"
+# for line in game_field:
+#     print(" ".join(line))
+
+
+field = []
+for _ in range(3):
+    row = []
+    for _ in range(3):
+        row.append(" ")
+    field.append(row)
+
+
+def print_field():
+    for line in field:
+        print(" ".join(line))
+        print("------")
+
+
+def move_checking(x, y):
+    return x in range(1, 4) and y in range(1, 4)
+
+
+def player_move():
+    while True:
+        x = int(input("Введите номер строки (от 1 до 3) "))
+        y = int(input("Введите номер колонки (от 1 до 3) "))
+        if move_checking(x, y):
+            field[x - 1][y - 1] = "X"
+            break
+        else:
+            print("Неправильный ввод (значения должны быть от 1 до 3) !")
+            # continue
+
+
+while True:
+    player_move()
+    print_field()
