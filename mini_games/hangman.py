@@ -15,11 +15,40 @@ import random
 # 5. Игра заканчивается победой, если все буквы слова угаданы, или проигрышем,
 # если количество штрафных очков достигает лимита (например, 6).
 
-words = [...]  # Список, из которого игра выбирает случайное слово
+string = "Игра заканчивается победой, если все буквы слова угаданы, или проигрышем Список, из которого игра выбирает случайное слово"
+string1 = string.replace(",", " ")
+words = string1.split()
 
+ws = random.choice(words)
+print(ws)
 
 def hangman():
-    ...
+    play_word = "*" * len(ws)
+    i = 1
+    m = 1 # проверка на 6 ошибок
+    while i < len(ws):
+        while True:
+            player_letter = input("введите одну букву ")
+            if len(player_letter) > 1:
+                print("я ошибся ,пожалуйста введите одну букву")
+            elif player_letter in play_word:
+                print("я забыл, такая буква уже есть")
+            else:
+                break
+        k = 0 # для угаданных букв и слов
+        for el in range(len(ws)):
+            if ws[el] == player_letter:
+                k += 1
+                play_word = play_word[0:el] + player_letter + play_word[el+1:]
+                print(f"верно вы угадали {k} 'symbols' введите следующий один символ: {play_word}")
+            elif ws[el] != player_letter and el == len(ws) and m < 7:
+                m +=1
+                print(f"не верно введите следующий один символ осталось {6 - i} раз: {play_word}")
+        i += 1
+    if k > 0:
+        print("вы угадали словo", play_word)
+    else:
+        print("вы не угадали словo", play_word)
 
 
 if __name__ == "__main__":
